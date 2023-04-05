@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Connected to BLE Device</title>
+  </head>
+  <body>
+    <h1>Connected to BLE Device</h1>
+    <p>{{ device }}</p>
+    <form action="/disconnect/{{ device.id }}" method="get">
+      <button type="submit">Disconnect</button>
+    </form>
+  </body>
+</html>

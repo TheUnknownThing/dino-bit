@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>BLE Devices</title>
+  </head>
+  <body>
+    <h1>BLE Devices</h1>
+    <ul>
+      {% for device in devices %}
+        <li>
+          {{ device['name'] }} ({{ device['address'] }})
+          <form action="/connect/{{ device['address'] }}" method="get">
+            <button type="submit">Connect</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

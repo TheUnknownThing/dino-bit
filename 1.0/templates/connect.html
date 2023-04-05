@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Connect to Host</h1>
+  <form id="connect-form" method="post">
+    <div class="form-group">
+      <label for="player_name">Player Name:</label>
+      <input type="text" class="form-control" id="player_name" name="player_name" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Connect</button>
+  </form>
+
+  <!-- Modal for save game -->
+  <div class="modal fade" id="save-modal" tabindex="-1" role="dialog" aria-labelledby="save-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="save-modal-label">Save Game</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="game_name">Game Name:</label>
+            <input type="text" class="form-control" id="game_name" name="game_name" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-game-btn">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function() {
+      $('#connect-form').submit(function(e) {
+        e.preventDefault();
+        $.ajax({
+          type: 'POST',
+          url: '/connect',
+          data: $(this).serialize(),
+          success: function(response) {
+            if (response.success) {
+              $('#connect-form').hide();
+              $('#connect-success').text('Connected to Host!');
+            }
+          }
+        });
+      });
+
+      $('#save-modal').on('show.bs.modal', function(event) {
+        var modal = $(this);
+        var gameNameInput = modal.find('#game_name');
+        gameNameInput.val('');
+      });
+
+      $('#save-game-btn').click(function() {
+        var gameNameInput = $('#game_name');
+        var gameName = gameNameInput.val();
+        if (gameName.length > 0) {
+          $.ajax({
+            type: 'POST',
+            url: '/save',
+            data: {'game_name': gameName},
+            success: function(response) {
+              alert('Game saved successfully!');
+            } ,error: function(error){
+              alert('Error saving game!');
+            }
+            });
+            $('#save-modal').modal('hide');
+            }
+            });
+            });
+    </script>
+{% endblock %}
