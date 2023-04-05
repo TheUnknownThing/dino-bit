@@ -1,13 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 
-app = Flask(__name__, static_folder='/templates', static_url_path='')
+app = Flask(__name__, static_folder='./templates', static_url_path='')
+# 这里的./templates是指静态文件的路径，static_url_path是指静态文件的访问路径 "."千万不能少
 bootstrap=Bootstrap(app)
 app.config['SECRET_KEY']="hello python"
 
 @app.route('/game',methods=['GET','POST'])
-def index():
-    return render_template('index.html')
+def index(iframeCount):
+    return render_template('index.html',num_frames=iframeCount)
 
 @app.route('/introduction')
 def introduction():
@@ -21,8 +22,11 @@ def home():
 def connect():
     return render_template('connect.html')
 
-@app.route('/game_select')
+@app.route('/game_select',methods=['GET','POST'])
 def game_select():
+    value=1
+    if (value != None):
+        redirect(url_for('game', iframeCount=value))
     return render_template('game_select.html')
 
 @app.route('/end')

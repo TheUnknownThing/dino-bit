@@ -96,15 +96,16 @@
         return attrObj;
     }
 
+    // Create iframes and append them to the body.
     gameLib.createIframe = function (_num)
     {
         var body = document.getElementsByTagName('body')[0];
         for(var i = 0; i < _num; i++){
-            var ifff = document.createElement('iframe');
-            ifff.src="game.html";
-            ifff.setAttribute("frameborder", "0");
-            iframeList.push(ifff);
-            body.appendChild(ifff);
+            var iframe = document.createElement('iframe');
+            iframe.src="game.html";
+            iframe.setAttribute("frameborder", "0");
+            iframeList.push(iframe);
+            body.appendChild(iframe);
         }
     }
 

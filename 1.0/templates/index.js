@@ -1,7 +1,8 @@
 const gameLib = require('./libs/gameLib.js');
+const iframeCount = document.getElementById('bl-script').getAttribute('iframeCount');
 
 // create four iframes and add them to the page
-gameLib.createIframe(4);
+gameLib.createIframe(iframeCount);
 
 // define key bindings
 document.addEventListener('keydown', function(event) {
