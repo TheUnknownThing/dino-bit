@@ -202,7 +202,9 @@
     Runner.keycodes = {
         JUMP: { '38': 1, '32': 1 },  // Up, spacebar
         DUCK: { '40': 1 },  // Down
-        RESTART: { '13': 1 }  // Enter
+        RESTART: { '13': 1 },  // Enter
+        ACCELERATE: { '107' : 1}, // +
+        STOPACCELERATE: { '109' : 1} // -
     };
 
 
@@ -686,7 +688,14 @@
                     this.restart();
                 }
             }
-
+            if (this.playing && !this.crashed && Runner.keycodes.ACCELERATE[e.keyCode]) {
+                e.preventDefault();
+                Runner.config.ACCELERATION = 0.05;
+            }
+            if (this.playing && !this.crashed && Runner.keycodes.STOPACCELERATE[e.keyCode]) {
+                e.preventDefault();
+                Runner.config.ACCELERATION = 0.01;
+            }
             if (this.playing && !this.crashed && Runner.keycodes.DUCK[e.keyCode]) {
                 e.preventDefault();
                 if (this.tRex.jumping) {
