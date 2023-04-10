@@ -16,6 +16,14 @@
         _do(iframeList[_index].contentWindow, _index);
     }
 
+    gameLib.exceptSpecificIframe = function (_do,_index){
+        for(var i = 0; i < iframeList.length; i++){
+            if ( i != _index){
+                _do(iframeList[i].contentWindow, i);
+            }
+        }
+    }
+
     /**
      * 让对应iframe的小恐龙跳起来
      */
@@ -49,6 +57,28 @@
                 preventDefault: function (){}
             }
         );
+    }
+
+    gameLib.accelerate = function (_win)
+    {
+        _win.Runner.instance_.onKeyDown(
+            {
+                keyCode: 107,
+                target: 1,
+                preventDefault: function(){}
+            }
+        )
+    }
+
+    gameLib.stopaccelerate = function (_win)
+    {
+        _win.Runner.instance_.onKeyDown(
+            {
+                keyCode: 109,
+                target: 1,
+                preventDefault: function(){}
+            }
+        )
     }
 
     /**
