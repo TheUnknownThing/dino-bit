@@ -46,6 +46,16 @@ document.addEventListener('keydown', function(event) {
     gameLib.specificIframe(function (_win) {
       gameLib.downDuck(_win);
     },3);
+  } else if (event.keyCode === 80) {
+    // P Key
+    gameLib.specificIframe(function (_win){
+      gameLib.accelerate(_win)
+    },0)
+  } else if (event.keyCode === 79) {
+    // O Key
+    gameLib.specificIframe(function (_win){
+      gameLib.stopaccelerate(_win)
+    },0)
   }
   
 });
