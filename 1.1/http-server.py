@@ -24,7 +24,7 @@ def index():
         elif message[1]=="Low":
             keyboard.send(key[message[0]][1])'''
             
-    return render_template('index.html',num_frames=1)
+    return render_template('index.html',num_frames=3)
 
 @app.route('/introduction')
 def introduction():
