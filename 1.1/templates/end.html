@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="text-center">
+        <h1 class="mb-4">Game Over</h1>
+        <p>Your highest score: {{ highest_score }}</p>
+        <img src="./assets/end.gif" width="500" height="200">
+        <p class="mt-4">Congratulations on your achievement!</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

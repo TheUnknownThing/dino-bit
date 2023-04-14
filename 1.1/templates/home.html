@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  小恐龙游戏介绍
+{% endblock %}
+
+{% block content %}
+  <br>
+  <div class="jumbotron">
+    <h1 class="display-4">dino:bit</h1>
+    <p class="lead">这是一个使用 micro:bit 和 Flask 实现的多人联机小恐龙游戏。</p>
+    <hr class="my-4">
+    <p>点击下方按钮开始游戏！</p>
+    <button class="btn btn-primary btn-lg" onclick="window.location.href='/game_select'">开始游戏</button>
+  </div>
+{% endblock %}
