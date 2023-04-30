@@ -1,7 +1,7 @@
 from time import sleep
 import keyboard
 import serial
-ser=serial.Serial(port="COM4",baudrate=115200)
+ser=serial.Serial(port="COM3",baudrate=115200)
 '''define key bindings
 // up arrow key: jump 0
 // q key: jump 1
@@ -23,18 +23,23 @@ key={"1":["up","down","p"],"2":["q","a","i"],"3":["w","s","j"],"4":["space","d",
 isLow=[False]*4
 if not ser.is_open:
     ser.open()
-
+cnt=0
 
 while True:
     message=ser.readline().strip().decode()
     if message:
-        print(message)
+        cnt+=1
+        print(cnt,message)
         message=message.split()
         if message[1]=="Jump":
             keyboard.send(key[message[0]][0])
         elif message[1]=="Low":
             keyboard.press(key[message[0]][1])
-            sleep(0.055)
+            sleep(0.015)
             keyboard.release(key[message[0]][1])
         elif message[1]=="Acc":
             keyboard.send(key[message[0]][2])
+    # if message:
+    #     cnt+=1
+    #     print(cnt,message)
+    # sleep(0.05)

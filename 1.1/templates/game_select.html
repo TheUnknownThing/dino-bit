@@ -15,7 +15,18 @@
             <p class="card-text">单人模式，挑战最高分！</p>
           </div>
           <div class="card-footer">
-            <a onclick="window.location.href='/game'" id="single" name="single" class="btn btn-primary">开始游戏</a>
+            <a id="single" name="single" class="btn btn-primary">开始游戏</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h4 class="card-title">单人计时赛</h4>
+            <p class="card-text">60秒计时，限时冲刺！</p>
+          </div>
+          <div class="card-footer">
+            <a id="limitTime" name="limitTime" class="btn btn-primary">开始游戏</a>
           </div>
         </div>
       </div>
@@ -26,8 +37,45 @@
             <p class="card-text">多人对战模式，与好友一起闯关！</p>
           </div>
           <div class="card-footer">
-            <a onclick="window.location.href='/game'" id="multi" name="multi" class="btn btn-primary">开始游戏</a>
+            <a id="multi" name="multi" class="btn btn-primary">开始游戏</a>
           </div>
         </div>
   </div>
+<script>
+//set the player count by input if the multi button is clicked
+document.getElementById("multi").onclick = function() {
+  var player = prompt("请输入玩家数量", "2");
+  localStorage.setItem("player", player);
+
+  localStorage.setItem("limitTime", 0);
+  //if player count > 4, alert
+  if (player > 4) {
+    alert("玩家数量不能超过4人");
+    window.location.href='/game_select';
+  }
+
+  //redirect to game page
+  window.location.href='/game';
+}
+
+document.getElementById("single").onclick = function() {
+  localStorage.setItem("player", 1);
+  localStorage.setItem("limitTime", 0);
+  //redirect to game page
+  window.location.href='/game';
+}
+
+// set the player count to 1 if the limitTime button is clicked
+document.getElementById("limitTime").onclick = function() {
+  localStorage.setItem("player", 1);
+  localStorage.setItem("limitTime", 1);
+  // let player decide the time limit and the acceleration
+  var acceleration = prompt("请输入加速度倍数，更高的倍数会带来更高的分数，同时更难操控", "1.5");
+  localStorage.setItem("acceleration", acceleration);
+  
+  //redirect to game page
+  window.location.href='/game';
+}
+
+</script>
 {% endblock %}

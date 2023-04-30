@@ -1,5 +1,9 @@
 const gameLib = require('./libs/gameLib.js');
-const iframeCount = document.getElementById('bl-script').getAttribute('iframeCount');
+//get iframeCount from localstorage
+const iframeCount = localStorage.getItem("player");
+if (iframeCount == null){
+  iframeCount = 1;
+}
 
 // create four iframes and add them to the page
 gameLib.createIframe(iframeCount);
@@ -60,22 +64,22 @@ document.addEventListener('keydown', function(event) {
     },3);
   } else if (event.keyCode === 80) {
     // P Key
-    gameLib.specificIframe(function (_win){
+    gameLib.exceptspecificIframe(function (_win){
       gameLib.accelerate(_win)
     },0)
   } else if (event.keyCode === 73) {
     // I Key
-    gameLib.specificIframe(function (_win){
+    gameLib.exceptspecificIframe(function (_win){
       gameLib.accelerate(_win)
     },1)
   } else if (event.keyCode === 74) {
     // J Key
-    gameLib.specificIframe(function (_win){
+    gameLib.exceptspecificIframe(function (_win){
       gameLib.accelerate(_win)
     },2)
   } else if (event.keyCode === 75) {
     // K Key
-    gameLib.specificIframe(function (_win){
+    gameLib.exceptspecificIframe(function (_win){
       gameLib.accelerate(_win)
     },3)
   }
@@ -127,6 +131,13 @@ setInterval(function() {
         text.innerHTML = "Game Over! Your score is " + score;
         document.body.appendChild(text);
         console.log(score)
+
+        //store the score in localstorage
+        localStorage.setItem("score", score);
+
+        //redirect to the score page
+        window.location.href = "/end";
+
         // restart the game
         gameLib.eachIframe(function (_win) {
           gameLib.restart(_win);

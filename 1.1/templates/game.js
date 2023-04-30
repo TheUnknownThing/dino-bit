@@ -108,8 +108,8 @@
         CLEAR_TIME: 3000,
         CLOUD_FREQUENCY: 0.5,
         GAMEOVER_CLEAR_TIME: 750,
-        GAP_COEFFICIENT: 0.6,
-        GRAVITY: 0.6,
+        GAP_COEFFICIENT: 3.5,
+        GRAVITY: 0.5,
         INITIAL_JUMP_VELOCITY: 12,
         INVERT_FADE_DURATION: 12000,
         INVERT_DISTANCE: 700,
@@ -121,7 +121,7 @@
         MIN_JUMP_HEIGHT: 35,
         MOBILE_SPEED_COEFFICIENT: 1.2,
         RESOURCE_TEMPLATE_ID: 'audio-resources',
-        SPEED: 6,
+        SPEED: 5, // former: 6
         SPEED_DROP_COEFFICIENT: 3
     };
 

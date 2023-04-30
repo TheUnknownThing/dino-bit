@@ -16,7 +16,7 @@
         _do(iframeList[_index].contentWindow, _index);
     }
 
-    gameLib.exceptSpecificIframe = function (_do,_index){
+    gameLib.exceptspecificIframe = function (_do,_index){
         for(var i = 0; i < iframeList.length; i++){
             if ( i != _index){
                 _do(iframeList[i].contentWindow, i);
@@ -136,24 +136,34 @@
         return attrObj;
     }
 
-    gameLib.createIframe = function (_num)
-    {
+    gameLib.createIframe = function (_num) {
         // Create iframes and append them to the body, making them centered.
         var body = document.getElementsByTagName('body')[0];
-        for(var i = 0; i < _num; i++){
+        for (var i = 0; i < _num; i++) {
             var iframe = document.createElement('iframe');
-            iframe.src="game.html";
+            iframe.src = "game.html";
             iframe.setAttribute("frameborder", "0");
             iframe.style.position = "absolute";
             iframe.style.left = "50%";
             iframe.style.marginLeft = "-300px";
-            iframe.style.top = (i*200) + "px";
+            iframe.style.top = (i * 200) + "px";
             iframe.style.marginTop = "50px";
             iframe.style.width = "600px";
             iframeList.push(iframe);
+            
+            // Create and append text to show the index of the iframe
+            var indexText = document.createElement('p');
+            indexText.innerHTML = 'Player ' + (i+1);
+            indexText.style.fontSize = "20px";
+            indexText.style.position = 'absolute';
+            indexText.style.left = '50%';
+            indexText.style.transform = 'translateX(-50%)';
+            indexText.style.top = (i * 200 + 200) + 'px';
             body.appendChild(iframe);
+            body.appendChild(indexText);
         }
     }
+    
 
     // Create iframes and append them to the body.
     gameLib.createIframeOld = function (_num)

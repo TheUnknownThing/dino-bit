@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
-import serial
+# import serial
 # import keyboard
-
-ser=serial.Serial()
-ser.port="COM1"
-ser.baudrate=115200
+#
+# ser=serial.Serial()
+# ser.port="COM1"
+# ser.baudrate=115200
 
 app = Flask(__name__, static_folder='./templates', static_url_path='')
 # 这里的static_folder指... 注意“.”不能少
@@ -24,11 +24,16 @@ def index():
         elif message[1]=="Low":
             keyboard.send(key[message[0]][1])'''
             
-    return render_template('index.html',num_frames=3)
+    return render_template('index.html',num_frames=4)
 
 @app.route('/introduction')
 def introduction():
     return render_template('introduction.html')
+
+@app.route('/countdown')
+def countdown():
+    return render_template('countdown.html')
+
 
 @app.route('/',methods=['GET','POST'])
 def home():
