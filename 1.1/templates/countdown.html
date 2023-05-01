@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>3-2-1 Countdown</title>
+	<title>Countdown</title>
 	<style>
 		body {
 			background-color: #ffffff;
@@ -33,6 +33,14 @@
 	<h1 id="countdown"></h1>
 
 	<script>
+		var count = 5;
+		var countdownInterval = setInterval(function() {
+		document.getElementById("countdown").innerHTML = "<span>" + count + "</span>";
+		if (count === 0) {
+			window.location.href='/game';
+		}
+		count--;
+		}, 1000);
 		
 	</script>
 </body>

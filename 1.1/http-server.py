@@ -24,7 +24,7 @@ def index():
         elif message[1]=="Low":
             keyboard.send(key[message[0]][1])'''
             
-    return render_template('index.html',num_frames=4)
+    return render_template('index.html')
 
 @app.route('/introduction')
 def introduction():
@@ -33,7 +33,6 @@ def introduction():
 @app.route('/countdown')
 def countdown():
     return render_template('countdown.html')
-
 
 @app.route('/',methods=['GET','POST'])
 def home():

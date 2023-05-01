@@ -1,13 +1,41 @@
 const gameLib = require('./libs/gameLib.js');
 //get iframeCount from localstorage
-const iframeCount = localStorage.getItem("player");
-if (iframeCount == null){
-  iframeCount = 1;
-}
-
-// create four iframes and add them to the page
+const iframeCount = localStorage.getItem("player") || 1;
+const limitTime = localStorage.getItem("limitTime");
+// create iframes and add them to the page
 gameLib.createIframe(iframeCount);
 
+setTimeout(function () {
+  // automatically start the game
+  gameLib.eachIframe(function (_win) {
+    gameLib.pressJump(_win);
+  });
+}, 1500);
+
+if (limitTime == 1){
+  // default time limit is 60 seconds
+  setTimeout(function () {
+    score = gameLib.getScore();
+    var text = document.createElement("p");
+        text.style.textAlign = "center";
+        text.style.fontSize = "10px";
+        text.style.color = "black";
+        text.style.fontFamily = "Arial";
+        text.style.position = "absolute";
+        text.style.top = "50%";
+        text.style.left = "50%";
+        text.style.transform = "translate(-50%, -50%)";
+        text.innerHTML = "Game Over! Your score is " + score;
+        document.body.appendChild(text);
+        console.log(score)
+
+        //store the score in localstorage
+        localStorage.setItem("score", score);
+
+        //redirect to the score page
+        window.location.href = "/end";
+  }, 60000);
+}
 // define key bindings
 // up arrow key: jump 0
 // q key: jump 1
