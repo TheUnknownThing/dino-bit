@@ -1,3 +1,6 @@
+# 缺陷：如何将翼龙（飞鸟）的数量增多？
+# # 以及可能会出现 Player0？
+# 排行榜比较麻烦，暂时鸽着
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 # import serial
@@ -24,7 +27,7 @@ def index():
         elif message[1]=="Low":
             keyboard.send(key[message[0]][1])'''
             
-    return render_template('index.html')
+    return render_template('index.html',num_frames=4)
 
 @app.route('/introduction')
 def introduction():
@@ -33,6 +36,7 @@ def introduction():
 @app.route('/countdown')
 def countdown():
     return render_template('countdown.html')
+
 
 @app.route('/',methods=['GET','POST'])
 def home():

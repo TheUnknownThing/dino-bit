@@ -10,7 +10,7 @@ setTimeout(function () {
   gameLib.eachIframe(function (_win) {
     gameLib.pressJump(_win);
   });
-}, 1500);
+}, 2500);
 
 if (limitTime == 1){
   // default time limit is 60 seconds
@@ -49,12 +49,16 @@ if (limitTime == 1){
 // i key: accelerate 1
 // j key: accelerate 2
 // k key: accelerate 3
+// l key: stop accelerating 0
+// o key: stop accelerating 1
+// u key: stop accelerating 2
+// m key: stop accelerating 3
 document.addEventListener('keydown', function(event) {
   if (event.keyCode === 38) {
     // up arrow key
     gameLib.specificIframe(function (_win) {
       gameLib.pressJump(_win);
-    },0); 
+    },0);
   } else if (event.keyCode === 81) {
     // q key
     gameLib.specificIframe(function (_win) {
@@ -110,8 +114,27 @@ document.addEventListener('keydown', function(event) {
     gameLib.exceptspecificIframe(function (_win){
       gameLib.accelerate(_win)
     },3)
+  } else if (event.keyCode === 76) {
+    // L Key
+    gameLib.specificIframe(function (_win){
+      gameLib.stopAccelerate(_win)
+    },0)
+  } else if (event.keyCode === 79) {
+    // O Key
+    gameLib.specificIframe(function (_win){
+      gameLib.stopAccelerate(_win)
+    },1)
+  } else if (event.keyCode === 85) {
+    // U Key
+    gameLib.specificIframe(function (_win){
+      gameLib.stopAccelerate(_win)
+    },2)
+  } else if (event.keyCode === 77) {
+    // M Key
+    gameLib.specificIframe(function (_win){
+      gameLib.stopAccelerate(_win)
+    },3)
   }
-  
 });
 
 // down arrow key: stop ducking 0
@@ -148,27 +171,26 @@ setInterval(function() {
     // restart all games
     score = gameLib.getScore();
     var text = document.createElement("p");
-        text.style.textAlign = "center";
-        text.style.fontSize = "10px";
-        text.style.color = "black";
-        text.style.fontFamily = "Arial";
-        text.style.position = "absolute";
-        text.style.top = "50%";
-        text.style.left = "50%";
-        text.style.transform = "translate(-50%, -50%)";
-        text.innerHTML = "Game Over! Your score is " + score;
-        document.body.appendChild(text);
-        console.log(score)
+    text.style.textAlign = "center";
+    text.style.fontSize = "10px";
+    text.style.color = "black";
+    text.style.fontFamily = "Arial";
+    text.style.position = "absolute";
+    text.style.top = "50%";
+    text.style.left = "50%";
+    text.style.transform = "translate(-50%, -50%)";
+//    text.innerHTML = "Game Over! Your score is" + score;
+    document.body.appendChild(text);
+//    console.log(score)
+//    store the score in localstorage
+    localStorage.setItem("score", score);
 
-        //store the score in localstorage
-        localStorage.setItem("score", score);
+    //redirect to the score page
+    window.location.href = "/end";
 
-        //redirect to the score page
-        window.location.href = "/end";
-
-        // restart the game
-        gameLib.eachIframe(function (_win) {
-          gameLib.restart(_win);
-        },0); 
+    // restart the game
+    gameLib.eachIframe(function (_win) {
+      gameLib.restart(_win);
+    },0);
   }
 }, 1000);

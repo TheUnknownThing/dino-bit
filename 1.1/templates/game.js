@@ -102,7 +102,7 @@
      * @enum {number}
      */
     Runner.config = {
-        ACCELERATION: 0.0005, // former: 0.001
+        ACCELERATION: 0.0003, // former: 0.001
         BG_CLOUD_SPEED: 0.2,
         BOTTOM_PAD: 10,
         CLEAR_TIME: 2000, // former: 3000
@@ -121,7 +121,7 @@
         MIN_JUMP_HEIGHT: 35,
         MOBILE_SPEED_COEFFICIENT: 1.2,
         RESOURCE_TEMPLATE_ID: 'audio-resources',
-        SPEED: 5, // former: 6
+        SPEED: 4, // former: 6
         SPEED_DROP_COEFFICIENT: 3
     };
 
@@ -380,7 +380,7 @@
             // Draw t-rex
             this.tRex = new Trex(this.canvas, this.spriteDef.TREX);
 
-            Runner.config.ACCELERATION = 0.001;
+            Runner.config.ACCELERATION = 0.0003;
 
             this.outerContainerEl.appendChild(this.containerEl);
 
@@ -696,7 +696,7 @@
             }
             if (this.playing && !this.crashed && Runner.keycodes.STOPACCELERATE[e.keyCode]) {
                 e.preventDefault();
-                Runner.config.ACCELERATION = 0.01;
+                Runner.config.ACCELERATION = 0.0003;
             }
             if (this.playing && !this.crashed && Runner.keycodes.DUCK[e.keyCode]) {
                 e.preventDefault();
@@ -838,7 +838,7 @@
                 this.playSound(this.soundFx.BUTTON_PRESS);
                 this.invert(true);
                 this.update();
-                Runner.config.ACCELERATION = 0.001;
+                Runner.config.ACCELERATION = 0.0003;
             }
         },
 
@@ -1443,7 +1443,7 @@
             height: 35,
             yPos: 105,
             multipleSpeed: 4,
-            minGap: 120,
+            minGap: 200, //former: 120
             minSpeed: 0,
             collisionBoxes: [
                 new CollisionBox(0, 7, 5, 27),
@@ -1457,8 +1457,8 @@
             height: 50,
             yPos: 90,
             multipleSpeed: 7,
-            minGap: 120,
-            minSpeed: 0,
+            minGap: 200, //former: 120
+            minSpeed: 5,
             collisionBoxes: [
                 new CollisionBox(0, 12, 7, 38),
                 new CollisionBox(8, 0, 7, 49),
@@ -1472,8 +1472,8 @@
             yPos: [100, 75, 50], // Variable height.
             yPosMobile: [100, 50], // Variable height mobile.
             multipleSpeed: 999,
-            minSpeed: 8.5,
-            minGap: 150,
+            minSpeed: 0, //former: 8.5
+            minGap: 60, //former: 150
             collisionBoxes: [
                 new CollisionBox(15, 15, 16, 5),
                 new CollisionBox(18, 21, 24, 6),
