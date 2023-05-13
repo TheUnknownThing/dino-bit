@@ -118,10 +118,11 @@
         MAX_OBSTACLE_LENGTH: 2, // former: 3
         MAX_OBSTACLE_DUPLICATION: 2,
         MAX_SPEED: 13,
+        MIN_SPEED: 4,
         MIN_JUMP_HEIGHT: 35,
         MOBILE_SPEED_COEFFICIENT: 1.2,
         RESOURCE_TEMPLATE_ID: 'audio-resources',
-        SPEED: 4, // former: 6
+        SPEED: 5, // former: 6
         SPEED_DROP_COEFFICIENT: 3
     };
 
@@ -557,7 +558,7 @@
                 if (!collision) {
                     this.distanceRan += this.currentSpeed * deltaTime / this.msPerFrame;
 
-                    if (this.currentSpeed < this.config.MAX_SPEED) {
+                    if (this.currentSpeed < this.config.MAX_SPEED && this.currentSpeed > this.config.MIN_SPEED) {
                         this.currentSpeed += this.config.ACCELERATION;
                     }
                 } else {
@@ -692,11 +693,11 @@
             }
             if (this.playing && !this.crashed && Runner.keycodes.ACCELERATE[e.keyCode]) {
                 e.preventDefault();
-                Runner.config.ACCELERATION = Runner.config.ACCELERATION * 2;
+                Runner.config.ACCELERATION = Math.abs(Runner.config.ACCELERATION * 2);
             }
             if (this.playing && !this.crashed && Runner.keycodes.STOPACCELERATE[e.keyCode]) {
                 e.preventDefault();
-                Runner.config.ACCELERATION = 0.0003;
+                Runner.config.ACCELERATION = -Math.abs(Runner.config.ACCELERATION * 2);
             }
             if (this.playing && !this.crashed && Runner.keycodes.DUCK[e.keyCode]) {
                 e.preventDefault();

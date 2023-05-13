@@ -154,12 +154,11 @@
             // Create and append text to show the index of the iframe
             var indexText = document.createElement('p');
             indexText.innerHTML = 'Player ' + (i+1);
-            indexText.style.fontSize = "18px";
+            indexText.style.fontSize = "20px";
             indexText.style.position = 'absolute';
             indexText.style.left = '50%';
             indexText.style.transform = 'translateX(-50%)';
             indexText.style.top = (i * 200 + 200) + 'px';
-
             body.appendChild(iframe);
             body.appendChild(indexText);
         }

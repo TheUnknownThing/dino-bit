@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="text-center">
+        <h1 class="mb-4">Game Over</h1>
+        <h2 class="mb-4">最高分: <span id="maxscore"></span></h2>
+        <h3 class="mb-4">Player <span id="player"></span> 获得最高分!</h2>
+        <img src="./assets/end.gif" width="500" height="200">
+        <h2 class="mt-4">恭喜你!</h2>
+        <a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a>
+        <a class="btn btn-primary btn-lg" href="/game" role="button">再玩一次</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    // display the score stored in localStorage, score is an array of 5 scores, scores is a float
+    var score = localStorage.getItem("score");
+    score = score.split(",");
+    var maxscore = Math.max(...score);
+    document.getElementById("maxscore").innerHTML = maxscore;
+
+    // display the player name
+    var maxplayer = score.indexOf(maxscore.toString()) + 1;
+
+    document.getElementById("player").innerHTML = maxplayer;
+</script>
+{% endblock %}

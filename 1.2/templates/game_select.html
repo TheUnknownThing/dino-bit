@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% block title %} 游戏选择 {% endblock %} {% block
+content %}
+<br />
+<h1 class="mb-4">请选择游戏模式</h1>
+<div class="row">
+  <div class="col-lg-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h4 class="card-title">单人游戏</h4>
+        <p class="card-text">单人模式，挑战最高分！</p>
+      </div>
+      <div class="card-footer">
+        <a id="single" name="single" class="btn btn-primary">开始游戏</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h4 class="card-title">单人计时赛</h4>
+        <p class="card-text">60秒计时，限时冲刺！</p>
+      </div>
+      <div class="card-footer">
+        <a id="limitTime" name="limitTime" class="btn btn-primary">开始游戏</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <h4 class="card-title">多人对战</h4>
+        <p class="card-text">多人对战模式，与好友一起闯关！</p>
+      </div>
+      <div class="card-footer">
+        <a id="multi" name="multi" class="btn btn-primary">开始游戏</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    //set the player count by input if the multi button is clicked
+    document.getElementById("multi").onclick = function () {
+      var player = prompt("请输入玩家数量", "2");
+      if (player !== null && player !== "") {
+        localStorage.setItem("player", player);
+        localStorage.setItem("limitTime", 0);
+
+        //if player count > 4, alert
+        if (player > 4) {
+          alert("玩家数量不能超过4人");
+          window.location.href = "/game_select";
+        }
+
+        //redirect to game page
+        window.location.href = "/countdown";
+      }
+    };
+
+    document.getElementById("single").onclick = function () {
+      localStorage.setItem("player", 1);
+      localStorage.setItem("limitTime", 0);
+      //redirect to game page
+      window.location.href = "/countdown";
+    };
+
+    // set the player count to 1 if the limitTime button is clicked
+    document.getElementById("limitTime").onclick = function () {
+      localStorage.setItem("player", 1);
+      localStorage.setItem("limitTime", 1);
+
+      //redirect to game page
+      window.location.href = "/countdown";
+    };
+  </script>
+  {% endblock %}
+</div>

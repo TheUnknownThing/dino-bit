@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+<br />
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="text-center">
+        <h1 class="mb-4">Game Over</h1>
+        <h2 class="mb-4">最高分: <span id="maxscore"></span></h2>
+        <h3 class="mb-4">Player <span id="player"></span> 获得最高分！</h3>
+        <img src="./assets/end.gif" width="500" height="200" />
+        <h2 class="mt-4">恭喜你！</h2>
+        <a class="btn btn-primary btn-lg" href="/" role="button">回到主页</a>
+        <a class="btn btn-primary btn-lg" href="/game" role="button"
+          >再玩一次</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // display the score stored in localStorage, score is an array of 5 scores, scores is a float
+  var score = JSON.parse(localStorage.getItem("score")); // trick! localStorage存储数组的操作。
+  console.log(score); // 不过需要注意，这里数组里的元素为字符串
+  var maxscore = 0.0,
+    id = 0;
+  for (var i = 0; i < score.length; ++i) {
+    if (maxscore < Number(score[i])) {
+      maxscore = Number(score[i]);
+      id = i;
+    }
+  }
+  document.getElementById("maxscore").innerHTML = maxscore.toFixed(2);
+
+  // display the player name
+  // 在字符串里用 indexOf 似乎有bug，王翰宁那版的js会出现 player0 的情况，这版应该不会有了
+  document.getElementById("player").innerHTML = id + 1;
+</script>
+{% endblock %}

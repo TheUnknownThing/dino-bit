@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block title %} 小恐龙游戏介绍 {% endblock %} {%
+block content %}
+<div class="jumbotron">
+  <h1 class="display-5">dino:bit</h1>
+  <p class="lead">
+    这是一个使用 micro:bit 和 Flask
+    实现的多·人·联·机·动·感·小·恐·龙·游戏。请阅读以下运·动·指·南：<br />
+    1. 跳跃：你将全力向空中跳跃，使小恐龙跳起来！<br />
+    2. 弯腰：你将以45~90°向前弯腰，使小恐龙俯身！<br />
+    3.
+    加速：你将向<b>左</b>侧45~90°弯腰，让别·的·玩·家·<b>加·速</b>·撞·到·仙·人·掌！<br />
+    4. 减速：你将向<b>右</b>侧45~90°弯腰，让自己<b>减速</b>！<br />
+    p.s.单人模式无法加速（一个人自然不能给别人加速），以及减速至多减到最小速度，最多加速到最大速度<br />
+    <b>游戏会有略微延时</b>，请先进行一轮调试，再正式进入游戏！<br />
+    <b
+      >进入游戏后将会有5秒倒计时，倒计时结束2秒后小恐龙会自动跳起，请做好准备！</b
+    ><br />
+    更为具体的说明见【简介】
+  </p>
+  <hr class="my-4" />
+  <p>点击下方按钮，选择游戏模式并开始游戏！</p>
+  <button
+    class="btn btn-primary btn-lg"
+    onclick="window.location.href='/game_select'"
+  >
+    开始游戏
+  </button>
+</div>
+{% endblock %}
